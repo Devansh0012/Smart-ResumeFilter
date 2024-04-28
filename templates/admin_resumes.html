@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resumes for {{ job.name }}</title>
+  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    .navbar {
+      background-color: #003366;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      border-spacing: 0;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #003366;
+      color: white;
+    }
+
+    td {
+      background-color: #f9f9f9;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #f2f2f2;
+    }
+
+    a {
+      color: #003366;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <body>
+    <div class="navbar">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="#about">About</a>
+      <a href="{{ url_for('admin') }}">Admin</a>
+      <a href="#contact">Contact</a>
+      <a href="{{ url_for('generate_skill_visualization') }}"
+        >View Skills Visualization</a
+      >
+    </div>
+    <h1>Resumes for {{ job.name }}</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>View Resume</th>
+          <th>Education</th>
+          <th>Links</th>
+          <th>Experience</th>
+          <th>Projects</th>
+          <th>Skills</th>
+          <th>Coursework</th>
+          <th>Achievements</th>
+          <th>matching percentage</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for resume in resumes %}
+        <tr>
+          <td>{{ resume.name }}</td>
+          <td>{{ resume.email }}</td>
+          <td>
+            <a
+              href="{{ url_for('view_resume', resume_id=resume._id)}}"
+              target="_blank"
+              >View Resume</a
+            >
+          </td>
+
+          <td>{{ resume.categories.get('education', [])|length }}</td>
+          <td>{{ resume.categories.get('links', [])|length }}</td>
+          <td>{{ resume.categories.get('experience', [])|length }}</td>
+          <td>{{ resume.categories.get('projects', [])|length }}</td>
+          <td>{{ resume.categories.get('skills', [])|length }}</td>
+          <td>{{ resume.categories.get('coursework', [])|length }}</td>
+          <td>{{ resume.categories.get('achievements', [])|length }}</td>
+          <td>{{resume.matching_percentage}}</td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

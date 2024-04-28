@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='admin.css') }}"
+    />
+    <style>
+      /* Add the navbar styling here */
+      .navbar {
+        background-color: #003366;
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .navbar a {
+        color: white;
+        text-decoration: none;
+        margin: 0 10px;
+      }
+
+      .navbar a:hover {
+        text-decoration: underline;
+      }
+
+      .form-container {
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-container label {
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .form-container input[type="text"],
+      .form-container input[type="email"],
+      .form-container input[type="file"],
+      .form-container button {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .form-container button {
+        background-color: #003366;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      .form-container button:hover {
+        background-color: #001f4d;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .w3-card-4 {
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .w3-card-4 header {
+        background-color: #003366;
+        color: white;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .w3-card-4 .w3-container {
+        padding: 20px;
+      }
+
+      .w3-card-4 footer {
+        background-color: #003366;
+        color: white;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .w3-bar {
+        background-color: #003366;
+        color: white;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: white;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .w3-card-4 {
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .w3-card-4 header {
+        background-color: #003366;
+        color: white;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .w3-card-4 .w3-container {
+        padding: 20px;
+      }
+
+      .w3-card-4 footer {
+        background-color: #003366;
+        color: white;
+        padding: 10px;
+        text-align: center;
+      }
+
+      a {
+        color: white;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+      .grid-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .w3-card-4 {
+        flex: 1 1 calc(25% - 20px); /* Flex-grow, flex-shrink, flex-basis */
+        max-width: calc(
+          80% - 20px
+        ); /* Prevent cards from stretching too much */
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .w3-card-4 header {
+        background-color: #003366;
+        color: white;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .w3-card-4 .w3-container {
+        padding: 20px;
+      }
+
+      .w3-card-4 footer {
+        background-color: #003366;
+        color: white;
+        padding: 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="#about">About</a>
+      <a href="{{ url_for('admin') }}">Admin</a>
+      <a href="#contact">Contact</a>
+      <a href="{{ url_for('generate_skill_visualization') }}"
+        >View Skills Visualization</a
+      >
+    </div>
+    <div class="form-container">
+      <form method="post">
+        <label for="job_name">Job Name:</label>
+        <input type="text" id="job_name" name="job_name" required /><br />
+        <label for="job_description">Job Description:</label>
+        <textarea
+          id="job_description"
+          name="job_description"
+          required
+        ></textarea
+        ><br />
+        <label for="keywords"
+          >Keywords (comma-separated): This Field is optional</label
+        >
+        <input type="text" id="keywords" name="keywords" /><br />
+
+        <button type="submit">Add Job</button>
+      </form>
+    </div>
+
+    <h5></h5>
+    {% for job in jobs %}
+    <center>
+      <div class="grid-container">
+        <div class="w3-card-4">
+          <header class="w3-container w3-blue">
+            <h1>{{ job.name }}</h1>
+          </header>
+
+          <div class="w3-container">
+            <p>{{ job.description }}</p>
+          </div>
+
+          <footer class="w3-container w3-blue">
+            <h5>
+              <a href="{{ url_for('admin_resumes', job_id=job._id) }}"
+                >filter Resumes</a
+              >
+            </h5>
+          </footer>
+        </div>
+      </div>
+    </center>
+    {% endfor %}
+  </body>
+</html>
