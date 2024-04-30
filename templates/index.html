@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Listings</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='admin.css') }}"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+      }
+
+      .w3-bar {
+        background-color: #003366;
+        color: white;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: white;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .w3-card-4 {
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .w3-card-4 header {
+        background-color: #003366;
+        color: white;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .w3-card-4 .w3-container {
+        padding: 20px;
+      }
+
+      .w3-card-4 footer {
+        background-color: #003366;
+        color: white;
+        padding: 10px;
+        text-align: center;
+      }
+
+      a {
+        color: white;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+      .grid-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .w3-card-4 {
+        flex: 1 1 calc(25% - 20px); /* Flex-grow, flex-shrink, flex-basis */
+        max-width: calc(
+          80% - 20px
+        ); /* Prevent cards from stretching too much */
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .w3-card-4 header {
+        background-color: #003366;
+        color: white;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .w3-card-4 .w3-container {
+        padding: 20px;
+      }
+
+      .w3-card-4 footer {
+        background-color: #003366;
+        color: white;
+        padding: 10px;
+        text-align: center;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: #fbfcfc;
+      }
+
+      form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="file"],
+      button {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        background-color: #003366;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #001f4d;
+      }
+
+      @media (max-width: 768px) {
+        .grid-container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="w3-bar">
+      <a href="#home" class="w3-bar-item w3-button">Home</a>
+      <a href="#about" class="w3-bar-item w3-button">About</a>
+      <a href="{{ url_for('admin') }}" class="w3-bar-item w3-button">Admin</a>
+      <a href="#contact" class="w3-bar-item w3-button">Contact</a>
+    </div>
+
+    <h1 style="color: #001f4d">Job Listings</h1>
+    {% for job in jobs %}
+
+    <div class="grid-container">
+      <div class="w3-card-4">
+        <header class="w3-container">
+          <h1>{{ job.name }}</h1>
+        </header>
+
+        <div class="w3-container">
+          <p>{{ job.description }}</p>
+        </div>
+
+        <footer class="w3-container">
+          <h5>
+            <a href="{{ url_for('apply', job_id=job._id) }}">Apply</a>
+          </h5>
+        </footer>
+      </div>
+    </div>
+
+    {% endfor %}
+  </body>
+</html>
